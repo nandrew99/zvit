@@ -1,0 +1,506 @@
+import React, { useState } from 'react';
+import { 
+  Globe, 
+  Landmark, 
+  Cpu, 
+  ShieldCheck, 
+  BookOpen, 
+  ChevronDown, 
+  ChevronRight,
+  Info,
+  Server,
+  Satellite,
+  Bot,
+  Plane,
+  MessageCircle
+} from 'lucide-react';
+
+export default function DiplomacyDashboard() {
+  const [activeTab, setActiveTab] = useState('intro');
+
+  const tabs = [
+    { id: 'intro', label: 'Вступ', icon: Globe },
+    { id: 'challenge1', label: 'Виклик 1: Внутрішня політика', icon: Landmark },
+    { id: 'challenge2', label: 'Виклик 2: Технодипломатія', icon: Cpu },
+    { id: 'challenge3', label: 'Виклик 3: Мережева безпека', icon: ShieldCheck },
+    { id: 'conclusion', label: 'Висновки', icon: BookOpen },
+  ];
+
+  return (
+    <div className="flex flex-col md:flex-row min-h-screen bg-slate-50 font-sans text-slate-800">
+      {/* Sidebar Navigation */}
+      <aside className="w-full md:w-72 bg-blue-950 text-white flex flex-col shadow-xl z-10 sticky top-0 md:h-screen">
+        <div className="p-6 border-b border-blue-900/50">
+          <h1 className="text-xl font-bold leading-tight text-slate-100 flex items-center gap-3">
+            <Globe className="w-8 h-8 text-yellow-400 flex-shrink-0" />
+            <span>Дипломатія ХХІ ст.</span>
+          </h1>
+          <p className="text-xs text-blue-300 mt-2">Аналітичний звіт</p>
+        </div>
+        <nav className="flex-1 overflow-y-auto p-4 space-y-2 flex md:block overflow-x-auto md:overflow-x-visible">
+          {tabs.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-3 w-full text-left px-4 py-3 rounded-lg transition-all duration-200 whitespace-nowrap md:whitespace-normal flex-shrink-0 md:flex-shrink ${
+                  isActive 
+                    ? 'bg-blue-900 text-yellow-400 shadow-md border-l-4 border-yellow-400' 
+                    : 'text-blue-100 hover:bg-blue-900/50 hover:text-white border-l-4 border-transparent'
+                }`}
+              >
+                <Icon className="w-5 h-5 flex-shrink-0" />
+                <span className="font-medium text-sm md:text-base">{tab.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+      </aside>
+
+      {/* Main Content Area */}
+      <main className="flex-1 p-6 md:p-10 lg:p-12 overflow-y-auto w-full">
+        <div className="max-w-5xl mx-auto">
+          {activeTab === 'intro' && <IntroSection />}
+          {activeTab === 'challenge1' && <Challenge1Section />}
+          {activeTab === 'challenge2' && <Challenge2Section />}
+          {activeTab === 'challenge3' && <Challenge3Section />}
+          {activeTab === 'conclusion' && <ConclusionSection />}
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function IntroSection() {
+  return (
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-blue-950 p-8 md:p-12 relative overflow-hidden">
+          <div className="absolute top-0 right-0 -mt-16 -mr-16 opacity-10 pointer-events-none">
+            <Globe className="w-64 h-64 text-white" />
+          </div>
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-4 relative z-10 leading-snug">
+            Еволюція та виклики двосторонньої дипломатії у ХХІ столітті
+          </h2>
+          <p className="text-yellow-400 font-semibold text-lg md:text-xl relative z-10 mb-2">
+            Аналіз трансформацій на прикладі зовнішньополітичної стратегії України
+          </p>
+        </div>
+        
+        <div className="p-8 md:p-12 space-y-6 text-slate-600 text-lg leading-relaxed">
+          <p>
+            Перехід людства від епохи домінування інформації до концептуальної епохи кардинально змінив архітектуру міжнародних відносин. 
+            Класична <strong className="text-slate-800">вестфальська система</strong>, у якій суверенні держави визнавалися єдиними легітимними суб’єктами, сьогодні зазнає глибокої ерозії.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 my-8">
+            <div className="bg-slate-50 p-6 rounded-xl border-l-4 border-blue-900 flex-1">
+              <h3 className="text-blue-950 font-bold mb-2 flex items-center gap-2">
+                <Info className="w-5 h-5 text-blue-600" /> Параліч інституцій
+              </h3>
+              <p className="text-sm">
+                Держави більше не можуть покладатися виключно на традиційні багатосторонні інституції (наприклад, Раду Безпеки ООН через зловживання правом вето) для забезпечення безпеки.
+              </p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded-xl border-l-4 border-yellow-500 flex-1">
+              <h3 className="text-blue-950 font-bold mb-2 flex items-center gap-2">
+                <Globe className="w-5 h-5 text-yellow-600" /> Унікальний прецедент
+              </h3>
+              <p className="text-sm">
+                Зовнішньополітична діяльність України після 2022 року є унікальним об’єктом аналізу інноваційних дипломатичних підходів в умовах екзистенційної загрози.
+              </p>
+            </div>
+          </div>
+
+          <p>
+            Цей звіт пропонує глибокий аналіз трьох фундаментальних викликів, з якими стикається двостороння дипломатія у ХХІ столітті, використовуючи як емпіричну базу дипломатичну практику України.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Challenge1Section() {
+  const [openAccordion, setOpenAccordion] = useState('agrarian');
+
+  const toggleAccordion = (id) => {
+    setOpenAccordion(openAccordion === id ? null : id);
+  };
+
+  return (
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-8">
+      <div>
+        <h2 className="text-3xl font-bold text-blue-950 mb-4 flex items-center gap-3">
+          <Landmark className="w-8 h-8 text-yellow-500" />
+          Виклик 1: Внутрішня політика
+        </h2>
+        <p className="text-slate-600 text-lg">
+          Інструменталізація двосторонніх відносин та диктат внутрішньополітичних виборчих циклів. Межі між внутрішньою та зовнішньою політикою розмиваються.
+        </p>
+      </div>
+
+      {/* Accordions for Case Studies */}
+      <div className="space-y-4">
+        <h3 className="text-xl font-bold text-slate-800 border-b pb-2">Кейс-стаді (Case Studies)</h3>
+        
+        {/* Accordion 1 */}
+        <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+          <button 
+            onClick={() => toggleAccordion('agrarian')}
+            className="w-full px-6 py-4 flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition-colors"
+          >
+            <span className="font-semibold text-lg text-blue-950">Українсько-польська аграрна криза</span>
+            {openAccordion === 'agrarian' ? <ChevronDown className="w-5 h-5 text-slate-500" /> : <ChevronRight className="w-5 h-5 text-slate-500" />}
+          </button>
+          {openAccordion === 'agrarian' && (
+            <div className="p-6 text-slate-700 space-y-4 border-t border-slate-100 bg-white">
+              <p>
+                Економічний протекціонізм проти стратегічного партнерства. Через морську блокаду ЄС ініціював «шляхи солідарності», проте значна частина зерна осіла в Польщі, обваливши ціни.
+              </p>
+              <ul className="list-disc pl-5 space-y-2 text-sm">
+                <li>Втрати європейських фермерів оцінювалися у щонайменше €417 млн.</li>
+                <li>Наближення парламентських виборів у Польщі змусило партію «Право і Справедливість» (PiS) жорстко реагувати на вимоги сільського електорату.</li>
+                <li>Ескалація: односторонні ембарго всупереч правилам ЄС, позов України до СОТ, погрози торговельних воєн.</li>
+              </ul>
+              <div className="p-4 bg-yellow-50 border-l-4 border-yellow-400 text-sm mt-4">
+                <strong>Висновок кейсу:</strong> Глобальні геополітичні інтереси були тимчасово принесені в жертву короткостроковим виборчим стратегіям.
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Accordion 2 */}
+        <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+          <button 
+            onClick={() => toggleAccordion('hungary')}
+            className="w-full px-6 py-4 flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition-colors"
+          >
+            <span className="font-semibold text-lg text-blue-950">Угорський вектор (Вплив на мультилатералізм)</span>
+            {openAccordion === 'hungary' ? <ChevronDown className="w-5 h-5 text-slate-500" /> : <ChevronRight className="w-5 h-5 text-slate-500" />}
+          </button>
+          {openAccordion === 'hungary' && (
+            <div className="p-6 text-slate-700 space-y-4 border-t border-slate-100 bg-white">
+              <p>
+                Використання права вето в рамках міжнародних організацій (ЄС, НАТО) як важеля впливу для вирішення суто двосторонніх претензій.
+              </p>
+              <ul className="list-disc pl-5 space-y-2 text-sm">
+                <li>Блокування комісії Україна-НАТО та погрози вето на переговори щодо вступу до ЄС.</li>
+                <li>Офіційна причина: освітні права меншин. Реальна причина: консолідація консервативного електорату партії Віктора Орбана.</li>
+                <li>Двосторонні відносини перетворилися на інструмент шантажу всієї європейської дипломатії.</li>
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Comparison Table */}
+      <div className="mt-8">
+        <h3 className="text-xl font-bold text-slate-800 mb-4">Еволюція дипломатичних відносин</h3>
+        <div className="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+          <table className="w-full text-left border-collapse bg-white">
+            <thead>
+              <tr className="bg-blue-950 text-white">
+                <th className="p-4 font-semibold w-1/4">Аспект</th>
+                <th className="p-4 font-semibold w-3/8 border-l border-blue-800">Традиційна парадигма (ХХ ст.)</th>
+                <th className="p-4 font-semibold w-3/8 border-l border-blue-800 text-yellow-400">Сучасна парадигма (ХХІ ст.)</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm">
+              <tr className="border-b border-slate-100 hover:bg-slate-50">
+                <td className="p-4 font-medium text-slate-800 bg-slate-50/50">Відокремленість рівнів політики</td>
+                <td className="p-4 border-l border-slate-100 text-slate-600">Зовнішня політика відносно ізольована від популізму; домінує елітарний підхід.</td>
+                <td className="p-4 border-l border-slate-100 text-blue-900 font-medium">Внутрішня політика безпосередньо диктує зовнішньополітичні кроки через реакцію на запити електорату.</td>
+              </tr>
+              <tr className="border-b border-slate-100 hover:bg-slate-50">
+                <td className="p-4 font-medium text-slate-800 bg-slate-50/50">Механізми вирішення торговельних спорів</td>
+                <td className="p-4 border-l border-slate-100 text-slate-600">Тривалі інституційні процедури (ГАТТ, СОТ) без надмірної політизації.</td>
+                <td className="p-4 border-l border-slate-100 text-blue-900 font-medium">Миттєва ескалація, публічні погрози ембарго, переведення в площину нацбезпеки.</td>
+              </tr>
+              <tr className="hover:bg-slate-50">
+                <td className="p-4 font-medium text-slate-800 bg-slate-50/50">Роль багатосторонніх альянсів (ЄС, НАТО)</td>
+                <td className="p-4 border-l border-slate-100 text-slate-600">Інтереси альянсу превалюють над двосторонніми конфліктами членів.</td>
+                <td className="p-4 border-l border-slate-100 text-blue-900 font-medium">Двосторонні конфлікти використовуються як привід для блокування (вето) роботи всього альянсу.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Challenge2Section() {
+  return (
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-8">
+      <div>
+        <h2 className="text-3xl font-bold text-blue-950 mb-4 flex items-center gap-3">
+          <Cpu className="w-8 h-8 text-yellow-500" />
+          Виклик 2: Технодипломатія
+        </h2>
+        <p className="text-slate-600 text-lg">
+          Приватизація інфраструктурної влади транснаціональними технологічними корпораціями (Big Tech). Держави змушені вибудовувати відносини з корпораціями на рівні міжнародної дипломатії.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Card 1 */}
+        <div className="group relative bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 h-80">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-950 to-blue-900 p-6 flex flex-col items-center justify-center text-center transform transition-transform duration-500 group-hover:-translate-y-full">
+            <Server className="w-16 h-16 text-yellow-400 mb-4" />
+            <h3 className="text-xl font-bold text-white mb-2">Інфраструктурна інверсія</h3>
+            <p className="text-blue-200 text-sm">Порятунок державних даних</p>
+            <div className="mt-6 px-4 py-2 bg-blue-800/50 rounded-full text-xs text-white uppercase tracking-wider border border-blue-700">
+              Наведіть для деталей
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-white p-6 flex flex-col transform transition-transform duration-500 translate-y-full group-hover:translate-y-0 overflow-y-auto">
+            <h3 className="text-lg font-bold text-blue-950 mb-3 border-b pb-2">Міграція в хмару</h3>
+            <p className="text-sm text-slate-600 mb-3">
+              Фізична ІТ-інфраструктура уряду опинилася під загрозою. Держава здійснила термінову міграцію критичних баз даних у хмарні середовища.
+            </p>
+            <ul className="text-sm text-slate-700 space-y-2 list-disc pl-4 flex-1">
+              <li>Розміщення реєстрів на серверах AWS та Microsoft у країнах НАТО.</li>
+              <li>Цифровий суверенітет став нерозривно пов'язаним із корпоративними політиками приватних компаній.</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Card 2 */}
+        <div className="group relative bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 h-80">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-800 p-6 flex flex-col items-center justify-center text-center transform transition-transform duration-500 group-hover:-translate-y-full">
+            <Satellite className="w-16 h-16 text-yellow-400 mb-4" />
+            <h3 className="text-xl font-bold text-white mb-2">Дилема подвійного призначення</h3>
+            <p className="text-slate-300 text-sm">Досвід SpaceX та Starlink</p>
+            <div className="mt-6 px-4 py-2 bg-slate-700/50 rounded-full text-xs text-white uppercase tracking-wider border border-slate-600">
+              Наведіть для деталей
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-white p-6 flex flex-col transform transition-transform duration-500 translate-y-full group-hover:translate-y-0 overflow-y-auto">
+            <h3 className="text-lg font-bold text-slate-900 mb-3 border-b pb-2">Комерція vs Зброя</h3>
+            <p className="text-sm text-slate-600 mb-3">
+              Starlink став магістраллю комунікації, але виникла проблема його використання для координації ударних систем.
+            </p>
+            <ul className="text-sm text-slate-700 space-y-2 list-disc pl-4 flex-1">
+              <li>Ризики ескалації та практика геофенсингу від керівництва SpaceX.</li>
+              <li>Приватна особа ухвалювала рішення стратегічного військового характеру.</li>
+              <li><strong>Рішення:</strong> Створення окремої мережі <em>Starshield</em> для урядових замовлень (повернення до класичних оборонних контрактів).</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Card 3 */}
+        <div className="group relative bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 h-80">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-800 to-indigo-900 p-6 flex flex-col items-center justify-center text-center transform transition-transform duration-500 group-hover:-translate-y-full">
+            <Bot className="w-16 h-16 text-yellow-400 mb-4" />
+            <h3 className="text-xl font-bold text-white mb-2">Кібербезпека та ШІ</h3>
+            <p className="text-indigo-200 text-sm">Інновації у комунікаціях</p>
+            <div className="mt-6 px-4 py-2 bg-indigo-800/50 rounded-full text-xs text-white uppercase tracking-wider border border-indigo-700">
+              Наведіть для деталей
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-white p-6 flex flex-col transform transition-transform duration-500 translate-y-full group-hover:translate-y-0 overflow-y-auto">
+            <h3 className="text-lg font-bold text-indigo-950 mb-3 border-b pb-2">Синтез рішень</h3>
+            <ul className="text-sm text-slate-700 space-y-3 list-disc pl-4 flex-1">
+              <li><strong>«Білі списки»:</strong> Алгоритм верифікації терміналів для блокування неавторизованих пристроїв агресора.</li>
+              <li><strong>Direct to Cell:</strong> Масштабне тестування прямого з'єднання звичайних смартфонів із супутниками в умовах знищених базових станцій.</li>
+              <li><strong>ШІ в дипломатії:</strong> «Вікторія Ші» – цифрова консульська представниця; аналіз текстів договорів за допомогою ШІ.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Challenge3Section() {
+  const [activeSubTab, setActiveSubTab] = useState('f16');
+
+  return (
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-8">
+      <div>
+        <h2 className="text-3xl font-bold text-blue-950 mb-4 flex items-center gap-3">
+          <ShieldCheck className="w-8 h-8 text-yellow-500" />
+          Виклик 3: Мережева безпека
+        </h2>
+        <p className="text-slate-600 text-lg">
+          Криза глобального мультилатералізму та розбудова архітектури «Мережевої безпеки» (мінілатералізму).
+          Альтернативна архітектура гарантій як відповідь на параліч ООН та ОБСЄ.
+        </p>
+      </div>
+
+      {/* Security Agreements Table */}
+      <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <h3 className="text-xl font-bold text-slate-800 mb-4">Двосторонні безпекові угоди (Замінник Статті 5)</h3>
+        <p className="text-sm text-slate-600 mb-4">
+          Понад 28 угод, що юридично закріплюють довгострокові зобов'язання (на основі Декларації G7), формуючи нову систему стримування агресора.
+        </p>
+        <div className="overflow-x-auto rounded-lg border border-slate-100">
+          <table className="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr className="bg-slate-100 text-slate-700">
+                <th className="p-3 border-b w-1/4">Характеристика</th>
+                <th className="p-3 border-b w-3/8 border-l">Угода з Великою Британією (12.01.2024)</th>
+                <th className="p-3 border-b w-3/8 border-l">Угода зі США (13.06.2024)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-slate-100">
+                <td className="p-3 font-semibold bg-slate-50">Строк дії</td>
+                <td className="p-3 border-l border-slate-100">Прагнення «сторічного партнерства», 10-річний базовий термін.</td>
+                <td className="p-3 border-l border-slate-100">10 років із можливістю продовження (виконавча угода).</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="p-3 font-semibold bg-slate-50">Ключові пріоритети</td>
+                <td className="p-3 border-l border-slate-100">ППО, далекобійна артилерія, кібербезпека, бронетехніка.</td>
+                <td className="p-3 border-l border-slate-100">Сумісність за стандартами НАТО, безпека у Чорному морі, розмінування.</td>
+              </tr>
+              <tr className="border-b border-slate-100">
+                <td className="p-3 font-semibold bg-slate-50">Врегулювання криз</td>
+                <td className="p-3 border-l border-slate-100">Механізм термінових консультацій у разі нового нападу.</td>
+                <td className="p-3 border-l border-slate-100">Вирішення шляхом консультацій, без міжнародних судів.</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold bg-slate-50">Інституційний вплив</td>
+                <td className="p-3 border-l border-slate-100">Синхронізація ЗСУ з НАТО. Підтримка економіки.</td>
+                <td className="p-3 border-l border-slate-100">Реформа сектору оборони, боротьба з корупцією, зміцнення інститутів.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Sub-tabs for special cases */}
+      <div className="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden">
+        <div className="flex border-b border-slate-200 bg-white">
+          <button
+            onClick={() => setActiveSubTab('f16')}
+            className={`flex-1 py-4 px-6 font-semibold flex items-center justify-center gap-2 transition-colors ${
+              activeSubTab === 'f16' ? 'text-blue-950 border-b-2 border-yellow-500 bg-slate-50' : 'text-slate-500 hover:bg-slate-50'
+            }`}
+          >
+            <Plane className="w-5 h-5" /> Коаліції спроможностей
+          </button>
+          <button
+            onClick={() => setActiveSubTab('peace')}
+            className={`flex-1 py-4 px-6 font-semibold flex items-center justify-center gap-2 transition-colors ${
+              activeSubTab === 'peace' ? 'text-blue-950 border-b-2 border-yellow-500 bg-slate-50' : 'text-slate-500 hover:bg-slate-50'
+            }`}
+          >
+            <MessageCircle className="w-5 h-5" /> Саміт миру та М'яка сила
+          </button>
+        </div>
+        
+        <div className="p-6">
+          {activeSubTab === 'f16' ? (
+            <div className="animate-in fade-in duration-300">
+              <h4 className="text-lg font-bold text-blue-900 mb-2">Авіаційна коаліція (F-16)</h4>
+              <p className="text-slate-700 mb-4">
+                Замість повільних бюрократичних альянсів, створено цільові «коаліції спроможностей» (Coalitions of the Willing) у рамках формату Рамштайн.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                  <span className="block text-xs uppercase font-bold text-slate-400 mb-1">Постачальники бортів</span>
+                  <span className="font-semibold text-slate-800">Нідерланди, Данія, Норвегія, Бельгія</span>
+                </div>
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                  <span className="block text-xs uppercase font-bold text-slate-400 mb-1">Підготовка та логістика</span>
+                  <span className="font-semibold text-slate-800">США, Велика Британія, Румунія</span>
+                </div>
+              </div>
+              <p className="text-sm text-slate-500 mt-4 italic">
+                Вищий пілотаж двосторонньої дипломатії: від отримання ліцензій на реекспорт технологій до узгодження логістичних ланцюгів.
+              </p>
+            </div>
+          ) : (
+            <div className="animate-in fade-in duration-300">
+              <h4 className="text-lg font-bold text-blue-900 mb-2">Глобальний консенсус та «Strategic Self»</h4>
+              <div className="space-y-4">
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-green-500">
+                  <h5 className="font-bold text-slate-800">Глобальний саміт миру (Червень 2024)</h5>
+                  <p className="text-sm text-slate-600 mt-1">
+                    Залучення Глобального Півдня (93 країни). Консенсус будується через мільйони індивідуальних двосторонніх контактів, а не автоматичним голосуванням в ООН.
+                  </p>
+                </div>
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-purple-500">
+                  <h5 className="font-bold text-slate-800">Публічна дипломатія («М'яка сила»)</h5>
+                  <p className="text-sm text-slate-600 mt-1">
+                    Конструювання «Стратегічного Я» — ідентичності демократичної, інноваційної нації. Використання пребункінгу проти дезінформації. Держава комунікує прямо з іноземними суспільствами, які тиснуть на свої уряди.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ConclusionSection() {
+  const conclusions = [
+    {
+      title: "Злиття внутрішньої та зовнішньої політики",
+      desc: "Дипломати повинні враховувати виборчі цикли партнерів, експертно розуміти соціологію та внутрішньополітичний лобізм країни перебування (кейс зернової кризи та вето Угорщини).",
+      icon: Landmark,
+      color: "text-blue-500",
+      bg: "bg-blue-100"
+    },
+    {
+      title: "Інституціоналізація технодипломатії",
+      desc: "Взаємодія з Big Tech вимагає складних юридичних рамок. Вирішення дилеми технологій подвійного призначення стає ключовим елементом нацбезпеки.",
+      icon: Cpu,
+      color: "text-purple-500",
+      bg: "bg-purple-100"
+    },
+    {
+      title: "Гнучка мережева безпека",
+      desc: "Замість громіздких альянсів майбутнє за функціональними, орієнтованими на результат коаліціями та десятками двосторонніх безпекових угод.",
+      icon: ShieldCheck,
+      color: "text-emerald-500",
+      bg: "bg-emerald-100"
+    },
+    {
+      title: "Синергія з публічною дипломатією",
+      desc: "Формування позитивного «Стратегічного Я» держави. Дипломатія ХХІ століття — це багаторівнева екосистема управління глобальними ризиками, а не кабінетне мистецтво.",
+      icon: Globe,
+      color: "text-amber-500",
+      bg: "bg-amber-100"
+    }
+  ];
+
+  return (
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="bg-blue-950 p-8 md:p-12 rounded-t-2xl">
+        <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+          <BookOpen className="w-8 h-8 text-yellow-400" />
+          Висновки
+        </h2>
+        <p className="text-blue-200 text-lg">
+          Основні трансформації дипломатичного інструментарію на основі українського досвіду.
+        </p>
+      </div>
+      
+      <div className="bg-white rounded-b-2xl shadow-sm border border-slate-200 border-t-0 p-8 md:p-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {conclusions.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div key={index} className="flex gap-4 items-start group">
+                <div className={`p-3 rounded-xl ${item.bg} flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon className={`w-6 h-6 ${item.color}`} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl text-slate-800 mb-2">{item.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
